@@ -53,10 +53,8 @@ public class CompteControllerTest {
 
     @Test
     void testCreateCompte() throws Exception {
-        // Créer un objet CompteDTO pour la requête POST
         CompteDTO compteDTO = new CompteDTO(1L, "Compte1", "Prenom1", "123456", 2000.0);
 
-        // Simuler le service pour renvoyer l'objet créé
         when(compteService.save(any(CompteDTO.class))).thenReturn(compteDTO);
 
         // Effectuer la requête POST et vérifier la réponse
