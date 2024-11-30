@@ -3,13 +3,14 @@ name: Run Tests
 on:
   pull_request:
     branches:
-      - main 
+      - main
   push:
     branches:
       - main
 
 jobs:
   test:
+    name: Execute Unit Tests 
     runs-on: ubuntu-latest
 
     steps:
@@ -21,12 +22,10 @@ jobs:
         uses: actions/setup-java@v2
         with:
           java-version: '17'
-          distribution: 'temurin' 
+          distribution: 'temurin'
 
       - name: Install dependencies
         run: mvn install -DskipTests=true
 
       - name: Run Tests
         run: mvn test
-
-     
