@@ -1,0 +1,44 @@
+name: SonarCloud Analysis
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  sonarcloud:
+    name: SonarCloud Scan
+    runs-on: ubuntu-latest
+
+    steps:
+    # Étape 1 : Vérification du code source
+    - name: Checkout Code
+      uses: actions/checkout@v3
+
+    # Étape 2 : Configuration Java (si projet Java)
+    - name: Set up JDK
+      uses: actions/setup-java@v3
+      with:
+        java-version: 17 # Changez selon la version de Java utilisée
+        distribution: temurin
+
+    # Étape 3 : Installation de Sonar Scanner (via Maven/Gradle ou directement)
+    - name: Install Sonar Scanner
+      run: |
+        wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-5.0.1.3006-linux.zip
+        unzip sonar-scanner-cli-5.0.1.3006-linux.zip
+        echo "PATH=$PATH:$PWD/sonar-scanner-5.0.1.3006-linux/bin" >> $GITHUB_ENV
+
+    # Étape 4 : Analyse avec SonarCloud
+    - name: Run SonarCloud Analysis
+      env:
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      run: |
+        sonar-scanner \
+          -Dsonar.projectKey=<votre-projet-key> \
+          -Dsonar.organization=<votre-organisation> \
+          -Dsonar.host.url=https://sonarcloud.io \
+          -Dsonar.login=$SONAR_TOKEN
