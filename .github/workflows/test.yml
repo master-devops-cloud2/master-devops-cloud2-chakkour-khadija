@@ -29,10 +29,4 @@ jobs:
       - name: Run Tests
         run: mvn test
 
-      # Optionnel : Télécharger les résultats des tests (si nécessaire)
-      - name: Upload Test Results (Optional)
-        if: always()
-        uses: actions/upload-artifact@v3
-        with:
-          name: junit-results
-          path: target/surefire-reports/*.xml 
+     
