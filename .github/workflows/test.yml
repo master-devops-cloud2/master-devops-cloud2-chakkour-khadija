@@ -10,7 +10,6 @@ on:
 
 jobs:
   test:
-    name: Execute Unit Tests 
     runs-on: ubuntu-latest
 
     steps:
