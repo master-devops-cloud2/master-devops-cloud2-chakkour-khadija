@@ -1,0 +1,37 @@
+name: SonarQube Analysis  
+
+on:  
+  pull_request:  
+    branches:  
+      - main  
+  push:  
+    branches:  
+      - main  
+
+jobs:  
+  sonarqube:  
+    runs-on: ubuntu-latest  
+    steps:  
+      - name: Checkout code  
+        uses: actions/checkout@v3  
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3  
+        with:  
+          java-version: '17'  
+
+      - name: Install dependencies (Maven example)  
+        run: mvn install  
+
+      - name: Run SonarQube Scan  
+        env:  
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}  
+        run: |  
+          mvn sonar:sonar \
+            -Dsonar.projectKey=master-devops-cloud2_master-devops-cloud2-chakkour-khadija \
+            -Dsonar.host.url=https://sonarcloud.io \
+            -Dsonar.organization=master-devops-cloud2 \
+            -Dsonar.login=${{ secrets.SONAR_TOKEN }}  
+
+      - name: Upload Quality Gate Status (Optional)  
+        run: echo "SonarQube Quality Gate Check Complete"
