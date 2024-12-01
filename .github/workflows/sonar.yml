@@ -26,7 +26,7 @@ jobs:
 
       - name: Run SonarQube Scan  
         env:  
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}  
+          SONAR_TOKEN: ${{ secrets.TOKEN_SONAR }}  
         run: |  
           mvn sonar:sonar \
             -Dsonar.projectKey=master-devops-cloud2_master-devops-cloud2-chakkour-khadija \
