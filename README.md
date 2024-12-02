@@ -1,1 +1,1 @@
-﻿# master-devops-cloud2-chakkour-khadija repo for gates tests
+﻿# master-devops-cloud2-chakkour-khadija repo for gates tests using github actions
